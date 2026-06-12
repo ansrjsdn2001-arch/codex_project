@@ -184,7 +184,7 @@ a {
 }
 
 .hero h1 {
-  font-size: clamp(2.35rem, 5vw, 4.5rem);
+  font-size: clamp(2.35rem, 3vw, 4rem);
   font-weight: 900;
   line-height: 1.13;
   letter-spacing: -0.035em;
@@ -566,6 +566,13 @@ a {
 }
 
 .contact-item span {
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.86rem;
+  overflow-wrap: anywhere;
+}
+
+.contact-item a {
   display: block;
   color: var(--color-muted);
   font-size: 0.86rem;
