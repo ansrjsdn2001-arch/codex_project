@@ -126,6 +126,7 @@
               <div class="tag-row">
                 <span>MySQL</span>
                 <span>Redis</span>
+                <span>Oracle DB</span>
               </div>
             </article>
             <article class="skill-card">
@@ -170,21 +171,29 @@
                 <span>Backend<br />Architecture</span>
               </div>
               <div class="project-body">
-                <h3>마이크로 결제 게이트웨이</h3>
+                <h3>LeafyGo</h3>
                 <p>
-                  트랜잭션 무결성과 멱등성을 고려해 결제 요청을 안전하게
-                  처리하는 API를 구현했습니다.
+                  국내 생태 관광 여행 정보를 공유하고 소통하고 여행 상품을
+                  소개하는 통합 커뮤니티 서비스로, 게시글(상품) 작성, 댓글,검색
+                  기능이 구현되어 있습니다.
                 </p>
                 <div class="tag-row">
-                  <span>Spring Cloud</span>
-                  <span>PostgreSQL</span>
+                  <span>Java</span>
+                  <span>Spring Boot</span>
+                  <span>React</span>
+                  <span>Vite</span>
+                  <span>Oracle DB</span>
                 </div>
                 <div class="project-actions">
                   <a href="#contact" class="button button-small button-primary"
                     >데모 보기</a
                   >
-                  <a href="#contact" class="button button-small button-outline"
-                    >자세히</a
+                  <a
+                    href="https://github.com/ansrjsdn2001-arch/semi_project"
+                    class="button button-small button-outline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >GIT</a
                   >
                 </div>
               </div>
@@ -195,21 +204,29 @@
                 <span>Real-time<br />AI API</span>
               </div>
               <div class="project-body">
-                <h3>실시간 분석 API</h3>
+                <h3>MoodCast</h3>
                 <p>
-                  Redis Pub/Sub과 비동기 처리를 활용해 사용자 지표를 실시간으로
-                  수집하고 제공합니다.
+                  사용자의 감정을 기반으로 하는 감정 기반 SNS 서비스 페이지로,
+                  게시글, 댓글, 검색, 실시간 채팅, 관리자 기능이 구현되어
+                  있습니다.
                 </p>
                 <div class="tag-row">
-                  <span>Node.js</span>
+                  <span>Java</span>
+                  <span>Spring Boot</span>
+                  <span>MySQL</span>
                   <span>Redis</span>
+                  <span>AWS S3</span>
                 </div>
                 <div class="project-actions">
                   <a href="#contact" class="button button-small button-primary"
                     >데모 보기</a
                   >
-                  <a href="#contact" class="button button-small button-outline"
-                    >자세히</a
+                  <a
+                    href="https://github.com/ansrjsdn2001-arch/MoodCast"
+                    class="button button-small button-outline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >GIT</a
                   >
                 </div>
               </div>
@@ -233,8 +250,12 @@
                   <a href="#contact" class="button button-small button-primary"
                     >데모 보기</a
                   >
-                  <a href="#contact" class="button button-small button-outline"
-                    >자세히</a
+                  <a
+                    href="#contact"
+                    class="button button-small button-outline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >GIT</a
                   >
                 </div>
               </div>
@@ -248,7 +269,7 @@
           <div class="contact-panel">
             <div class="contact-copy">
               <p class="section-label">Contact</p>
-              <h2>신뢰할 수 있는 가치를 함께 만들겠습니다</h2>
+              <h2>신뢰할 수 있는 가치를 <br />함께 만들겠습니다</h2>
               <p>
                 문제를 정확히 이해하고, 작게 검증하며, 꾸준히 개선하는 개발자가
                 되겠습니다. 협업과 피드백을 환영합니다.
@@ -256,10 +277,25 @@
             </div>
 
             <div class="contact-grid">
-              <a href="mailto:cmzltlak1@naver.com" class="contact-item">
-                <strong>이메일</strong>
-                <span>cmzltlak1@naver.com</span>
-              </a>
+              <div class="contact-item contact-item-copy">
+                <div>
+                  <strong>이메일</strong>
+                  <span id="email-address">cmzltlak1@naver.com</span>
+                </div>
+                <button
+                  class="copy-email-button"
+                  type="button"
+                  aria-label="이메일 주소 복사"
+                  data-copy-target="email-address"
+                >
+                  <img src="copy_icon.png" alt="" aria-hidden="true" />
+                </button>
+                <span
+                  class="copy-feedback"
+                  role="status"
+                  aria-live="polite"
+                ></span>
+              </div>
               <a
                 href="https://github.com/ansrjsdn2001-arch"
                 class="contact-item"
@@ -273,10 +309,15 @@
                 <strong>노션</strong>
                 <span>문서화 포트폴리오</span>
               </div>
-              <div class="contact-item">
-                <strong>링크드인</strong>
-                <span>프로페셔널 네트워크</span>
-              </div>
+              <a
+                href="https://docs.google.com/document/d/1rdgOkb-R4lpSEfoItdq_-V1gqnSvoBtW/edit?pli=1"
+                class="contact-item"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <strong>입사지원서</strong>
+                <span>개인 입사지원서</span>
+              </a>
             </div>
           </div>
         </div>
@@ -295,7 +336,7 @@
             rel="noopener noreferrer"
             >깃허브</a
           >
-          <a href="#contact">링크드인</a>
+          <a href="#contact">노션</a>
         </div>
       </div>
     </footer>

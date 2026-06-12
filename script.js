@@ -3,6 +3,10 @@ const menuToggle = document.querySelector(".menu-toggle");
 const navMenu = document.querySelector(".nav-menu");
 const navLinks = document.querySelectorAll(".nav-link");
 const sections = document.querySelectorAll(".section");
+const tagRows = document.querySelectorAll(".tag-row");
+const copyEmailButton = document.querySelector(".copy-email-button");
+const copyFeedback = document.querySelector(".copy-feedback");
+let copyFeedbackTimer;
 
 function getHeaderHeight() {
   return header ? header.offsetHeight : 0;
@@ -36,6 +40,43 @@ function setActiveNavLink() {
     const linkTarget = link.getAttribute("href").replace("#", "");
     link.classList.toggle("active", linkTarget === currentSectionId);
   });
+}
+
+function updateTagRowLineState() {
+  tagRows.forEach((tagRow) => {
+    const tagLinePositions = new Set(
+      Array.from(tagRow.children).map((tag) => tag.offsetTop)
+    );
+
+    tagRow.classList.toggle("single-line", tagLinePositions.size <= 1);
+  });
+}
+
+async function copyTextToClipboard(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.top = "-9999px";
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
+}
+
+function showCopyFeedback(message) {
+  copyFeedback.textContent = message;
+  copyFeedback.classList.add("show");
+  clearTimeout(copyFeedbackTimer);
+
+  copyFeedbackTimer = window.setTimeout(() => {
+    copyFeedback.classList.remove("show");
+  }, 1600);
 }
 
 menuToggle.addEventListener("click", () => {
@@ -80,9 +121,26 @@ document.addEventListener("click", (event) => {
   }
 });
 
+copyEmailButton.addEventListener("click", async () => {
+  const targetId = copyEmailButton.dataset.copyTarget;
+  const target = document.getElementById(targetId);
+
+  if (!target) {
+    return;
+  }
+
+  try {
+    await copyTextToClipboard(target.textContent.trim());
+    showCopyFeedback("복사 완료");
+  } catch (error) {
+    showCopyFeedback("복사 실패");
+  }
+});
+
 window.addEventListener("scroll", setActiveNavLink);
 window.addEventListener("resize", () => {
   setActiveNavLink();
+  updateTagRowLineState();
 
   if (window.innerWidth > 720 && navMenu.classList.contains("open")) {
     closeMobileMenu();
@@ -90,3 +148,4 @@ window.addEventListener("resize", () => {
 });
 
 setActiveNavLink();
+updateTagRowLineState();
