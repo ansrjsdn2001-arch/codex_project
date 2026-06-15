@@ -1,12 +1,11 @@
-const header = document.querySelector(".site-header");
+﻿const header = document.querySelector(".site-header");
 const menuToggle = document.querySelector(".menu-toggle");
 const navMenu = document.querySelector(".nav-menu");
 const navLinks = document.querySelectorAll(".nav-link");
 const sections = document.querySelectorAll(".section");
 const tagRows = document.querySelectorAll(".tag-row");
-const copyEmailButton = document.querySelector(".copy-email-button");
-const copyFeedback = document.querySelector(".copy-feedback");
-let copyFeedbackTimer;
+const copyLinkButtons = document.querySelectorAll(".copy-link-button");
+const copyFeedbackTimers = new WeakMap();
 
 function getHeaderHeight() {
   return header ? header.offsetHeight : 0;
@@ -69,14 +68,46 @@ async function copyTextToClipboard(text) {
   textarea.remove();
 }
 
-function showCopyFeedback(message) {
+function getCopyValue(value) {
+  if (!value) {
+    return "";
+  }
+
+  if (value.startsWith("#")) {
+    return `${window.location.origin}${window.location.pathname}${value}`;
+  }
+
+  return value;
+}
+
+function showCopyFeedback(button, message) {
+  const contactItem = button.closest(".contact-item");
+  const copyFeedback = contactItem
+    ? contactItem.querySelector(".copy-feedback")
+    : null;
+
+  if (!copyFeedback) {
+    return;
+  }
+
+  document.querySelectorAll(".copy-feedback.show").forEach((feedback) => {
+    if (feedback !== copyFeedback) {
+      feedback.classList.remove("show");
+    }
+  });
+
   copyFeedback.textContent = message;
   copyFeedback.classList.add("show");
-  clearTimeout(copyFeedbackTimer);
 
-  copyFeedbackTimer = window.setTimeout(() => {
+  const previousTimer = copyFeedbackTimers.get(copyFeedback);
+  clearTimeout(previousTimer);
+
+  const nextTimer = window.setTimeout(() => {
     copyFeedback.classList.remove("show");
+    copyFeedbackTimers.delete(copyFeedback);
   }, 1600);
+
+  copyFeedbackTimers.set(copyFeedback, nextTimer);
 }
 
 menuToggle.addEventListener("click", () => {
@@ -121,20 +152,21 @@ document.addEventListener("click", (event) => {
   }
 });
 
-copyEmailButton.addEventListener("click", async () => {
-  const targetId = copyEmailButton.dataset.copyTarget;
-  const target = document.getElementById(targetId);
+copyLinkButtons.forEach((button) => {
+  button.addEventListener("click", async () => {
+    const textToCopy = button.dataset.copyValue;
 
-  if (!target) {
-    return;
-  }
+    if (!textToCopy) {
+      return;
+    }
 
-  try {
-    await copyTextToClipboard(target.textContent.trim());
-    showCopyFeedback("복사 완료");
-  } catch (error) {
-    showCopyFeedback("복사 실패");
-  }
+    try {
+      await copyTextToClipboard(getCopyValue(textToCopy.trim()));
+      showCopyFeedback(button, "복사 완료");
+    } catch (error) {
+      showCopyFeedback(button, "복사 실패");
+    }
+  });
 });
 
 window.addEventListener("scroll", setActiveNavLink);

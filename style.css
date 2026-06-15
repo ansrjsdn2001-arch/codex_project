@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --color-bg: #f7f8f8;
   --color-surface: #ffffff;
   --color-text: #111827;
@@ -556,7 +556,15 @@ a {
 .contact-item-copy {
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  column-gap: 8px;
+  column-gap: 12px;
+}
+
+.contact-link-content {
+  min-width: 0;
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.86rem;
+  overflow-wrap: anywhere;
 }
 
 .contact-item strong {
@@ -572,14 +580,8 @@ a {
   overflow-wrap: anywhere;
 }
 
-.contact-item a {
-  display: block;
-  color: var(--color-muted);
-  font-size: 0.86rem;
-  overflow-wrap: anywhere;
-}
 
-.copy-email-button {
+.copy-link-button {
   display: inline-grid;
   place-items: center;
   width: 38px;
@@ -594,18 +596,18 @@ a {
     transform 180ms ease;
 }
 
-.copy-email-button:hover {
+.copy-link-button:hover {
   border-color: rgba(0, 107, 79, 0.35);
   background: #d9f0e8;
   transform: translateY(-1px);
 }
 
-.copy-email-button:focus-visible {
+.copy-link-button:focus-visible {
   outline: 3px solid rgba(0, 107, 79, 0.22);
   outline-offset: 2px;
 }
 
-.copy-email-button img {
+.copy-link-button img {
   width: 18px;
   height: 18px;
   object-fit: contain;
@@ -614,11 +616,12 @@ a {
 .copy-feedback {
   position: absolute;
   right: 18px;
-  bottom: -22px;
+  bottom: 8px;
   color: var(--color-primary);
   font-size: 0.76rem;
   font-weight: 800;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 180ms ease;
 }
 
